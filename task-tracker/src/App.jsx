@@ -24,38 +24,45 @@ const App = () => {
     ];
 
     return (
-        <div className="bg-blue-200 h-screen">
+        <div className="bg-blue-200 min-h-screen">
             <p className="bg-blue-400 text-white p-4 text-center font-bold text-3xl">
                 React Task Tracker App
             </p>
 
-            <div className="p-4 bg-white m-4 rounded shadow-md">
-                {/* App content goes here */}
-                <p className="p-2 rounded text-center text-2xl font-semibold">Tasks</p>
-                <div class="w-full h-px bg-gray-300"></div>
-                <div>
-                    <div className="flex justify-end p-2">
-                        <div className="flex items-center gap-x-1 mr-4">
-                            <span className="inline-block border-1 w-4 h-4 rounded-full bg-green-100"></span>
-                            <p>Done tasks</p>
-                        </div>
-                        <div className="flex items-center gap-x-1">
-                            <span className="inline-block border-1 w-4 h-4 rounded-full bg-yellow-100"></span>
-                            <p>Pending tasks</p>
-                        </div>
+            <div className="p-4 bg-white m-4 rounded shadow-md max-w-2xl mx-auto">
+                <p className="p-2 text-center text-2xl font-semibold">Tasks</p>
+                <div className="w-full h-px bg-gray-300 my-2"></div>
+
+                {/* Legend */}
+                <div className="flex justify-end p-2 gap-x-4 text-sm">
+                    <div className="flex items-center gap-x-1">
+                        <span className="inline-block w-4 h-4 rounded-full bg-green-200 border"></span>
+                        <p>Done</p>
                     </div>
-                    {tasks.map((task) => (
-                        <div
-                            key={task.id}
-                            className={`p-2 m-2 rounded shadow-md flex place-content-between ${
-                                task.status === "done" ? "bg-green-100" : "bg-yellow-100"
-                            }`}
-                        >
-                            <p className="font-semibold">{task.title}</p>
-                            <p>{task.dueDate}</p>
-                        </div>
-                    ))}
+                    <div className="flex items-center gap-x-1">
+                        <span className="inline-block w-4 h-4 rounded-full bg-yellow-200 border"></span>
+                        <p>Pending</p>
+                    </div>
                 </div>
+
+                {/* Task List */}
+                {tasks.map((task) => (
+                    <div
+                        key={task.id}
+                        className={`p-3 m-2 rounded shadow-sm flex justify-between items-center ${task.status === "done" ? "bg-green-100" : "bg-yellow-100"
+                            }`}
+                    >
+                        <div>
+                            <p className="font-semibold">{task.title}</p>
+                            <p className="text-sm text-gray-600">{task.dueDate}</p>
+                        </div>
+
+                        <span
+                            className={`w-3 h-3 rounded-full ${task.status === "done" ? "bg-green-500" : "bg-yellow-500"
+                                }`}
+                        ></span>
+                    </div>
+                ))}
             </div>
         </div>
     );
